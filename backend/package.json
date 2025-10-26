@@ -1,0 +1,40 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js",
+    "debug": "node --inspect src/app.js",
+    "debug-brk": "node --inspect-brk src/app.js",
+    "dev": "nodemon src/app.js",
+    "dev-debug": "nodemon --inspect src/app.js",
+    "migration:create": "node database/migrate.js create",
+    "migration:run": "node database/migrate.js run",
+    "migration:rollback": "node database/migrate.js rollback",
+    "migration:status": "node database/migrate.js status",
+    "migration:reset": "node database/migrate.js reset",
+    "seed": "node database/seeders/index.js",
+    "init-db": "npm run migration:run && npm run seed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.19.1",
+    "morgan": "^1.10.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
