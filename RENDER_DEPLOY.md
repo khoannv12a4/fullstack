@@ -38,15 +38,24 @@
    ```
 
 4. **Environment Variables** - Add các biến sau:
-   ```
-   NODE_ENV=production
-   PORT=3000
-   MONGODB_URI=<paste-connection-string-từ-bước-2>
-   JWT_SECRET=render_secret_key_12345_change_this
-   JWT_REFRESH_SECRET=render_refresh_key_67890_change_this
-   JWT_EXPIRES_IN=15m
-   JWT_REFRESH_EXPIRES_IN=7d
-   CORS_ORIGIN=*
+   
+   **⚠️ Quan trọng: Phải set đúng tên biến**
+   
+   | Key | Value |
+   |-----|-------|
+   | `NODE_ENV` | `production` |
+   | `PORT` | `3000` |
+   | `MONGODB_URI` | Paste connection string từ MongoDB ở Bước 2 |
+   | `JWT_SECRET` | `render_secret_key_12345_change_this` |
+   | `JWT_REFRESH_SECRET` | `render_refresh_key_67890_change_this` |
+   | `JWT_EXPIRES_IN` | `15m` |
+   | `JWT_REFRESH_EXPIRES_IN` | `7d` |
+   | `CORS_ORIGIN` | `*` (update sau khi có frontend URL) |
+   
+   💡 **Tip**: Generate secure secrets:
+   ```powershell
+   # Windows PowerShell
+   node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
    ```
 
 5. Click **Create Web Service**
