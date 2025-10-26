@@ -4,14 +4,14 @@ const config = {
   NODE_ENV: process.env.NODE_ENV || 'development',
   
   // Database
-  MONGODB_URI: process.env.MONGODB_URI,
+  MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost:27017/fullstack',
   
   // JWT
   JWT: {
-    ACCESS_SECRET: process.env.JWT_SECRET,
-    REFRESH_SECRET: process.env.JWT_REFRESH_SECRET,
-    ACCESS_EXPIRY: process.env.JWT_EXPIRE || '15m',
-    REFRESH_EXPIRY: process.env.JWT_REFRESH_EXPIRE || '7d'
+    ACCESS_SECRET: process.env.JWT_SECRET || 'dev-secret-key',
+    REFRESH_SECRET: process.env.JWT_REFRESH_SECRET || 'dev-refresh-secret-key',
+    ACCESS_EXPIRY: process.env.JWT_EXPIRES_IN || '15m',
+    REFRESH_EXPIRY: process.env.JWT_REFRESH_EXPIRES_IN || '7d'
   },
   
   // Security
@@ -23,5 +23,17 @@ const config = {
     MAX_REQUESTS: 100
   }
 };
+
+// Validate required environment variables in production
+if (config.NODE_ENV === 'production') {
+  const requiredEnvVars = ['MONGODB_URI', 'JWT_SECRET', 'JWT_REFRESH_SECRET'];
+  const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
+  
+  if (missingVars.length > 0) {
+    console.error('❌ Missing required environment variables:');
+    missingVars.forEach(varName => console.error(`   - ${varName}`));
+    process.exit(1);
+  }
+}
 
 module.exports = config;
